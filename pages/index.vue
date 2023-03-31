@@ -10,3 +10,9 @@
         <div class="z-1 absolute w-full h-full opacity-50 bg-black"></div>
     </div>
 </template>
+
+<script setup>
+    useHead({
+        title: "Todo App"
+    })
+</script>

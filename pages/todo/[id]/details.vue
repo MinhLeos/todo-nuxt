@@ -1,6 +1,6 @@
 <template>
     <!-- Todo Item -->
-    <div class="w-[70%] lg:w-[50%] mx-auto mt-24">
+    <div class="w-[70%] lg:w-[50%] mx-auto my-24 ">
         <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
             <div class="flex items-center justify-center my-6">
                 <h4 class="text-center text-2xl mr-10">Todo Title</h4>
