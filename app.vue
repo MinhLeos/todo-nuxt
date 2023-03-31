@@ -1,0 +1,149 @@
+<template>
+  <div>
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 flex justify-between space-x-1 border-b bg-white p-4 shadow-md">
+      <a class="text-3xl" href="">Todo</a>
+    </header>
+    <!-- Navbar -->
+
+    <!-- List Todo Page -->
+    <div class="mx-[15%] mt-4 max-w-7xl space-y-4 px-4 xs:px-8 sn:px-10 lg:px-16 lg:ml-[7%] pb-16">
+      <div class="mt-24 flex">
+        <!-- todo side bar -->
+        <div class="sticky top-[170px] shadow border w-64 mr-10 z-30 min-w-[200px] max-h-[260px]">
+          <div class="p-5 flex justify-between cursor-pointer border-b">
+            <h4>All</h4>
+          </div>
+          <div class="p-5 flex justify-between cursor-pointer border-b">
+            <h4>New</h4>
+          </div>
+          <div class="p-5 flex justify-between cursor-pointer border-b">
+            <h4>Done</h4>
+          </div>
+          <div class="p-5 flex justify-between cursor-pointer border-b">
+            <h4>Deleted</h4>
+          </div>
+        </div>
+        <!-- todo side bar -->
+
+        <!-- Todos Items List -->
+        <div class="w-[70%]">
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Description 1</li>
+                <li class="truncate">Description 2</li>
+                <li class="truncate">Description 3</li>
+                <li class="truncate">Description 4</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Todo Description: Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex.</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Todo Description: Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex.</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Todo Description: Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex.</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Todo Description: Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex. Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex.</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+
+          <!-- Todo Item -->
+          <div class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
+            <div class="flex items-center justify-center my-6">
+              <h4 class="text-center text-xl mr-10">Todo Title</h4>
+              <p class="bg-[blue] text-white rounded-full px-4">Todo status</p>
+            </div>
+            <div class="mx-4 mb-4 h-[50px] overflow-hidden">
+              <ul>
+                <li class="truncate">Todo Description: Vue is a JavaScript framework for building user interfaces. It builds on top of standard
+              HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you
+              efficiently develop user interfaces, be they simple or complex.</li>
+              </ul>
+            </div>
+            <p class="text-center">id: 123456789</p>
+            <p class="text-center mb-4">Created at: <i>2011-11-11</i></p>
+          </div>
+          <!-- Todo Item -->
+         
+        </div>
+        <!-- Todos Items List -->
+      </div>
+    </div>
+    <!-- List Todo Page -->
+
+  </div>
+</template>
