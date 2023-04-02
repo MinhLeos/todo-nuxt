@@ -19,7 +19,7 @@
 
 <script setup>
     const props = defineProps(['filter'])
-    console.log('props.filter', props.filter)
+    console.log('props?.filter', props?.filter)
     function handleClick(value) {
         if(!value) {
             navigateTo(`/todos-list`)

@@ -1,16 +1,11 @@
 <template>
     <div class="mt-24 flex">
         <TodoSideBar :filter="filter"></TodoSideBar>
-        <div class="w-[70%]">
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
-            <TodoItem></TodoItem>
+        <div class="w-[70%] mb-16">
+            <TodoItem v-for="todo in todosList" :key="todo.id" :todo="todo"></TodoItem>
+            
+            <!-- <TodoItem></TodoItem>
+            <TodoItem></TodoItem> -->
 
             <!-- <ItemTodo></ItemTodo>
             <ItemTodo></ItemTodo> -->
@@ -25,4 +20,6 @@
     watch(() => route.query, () => {
         filter.value = route.query.filterValue || ''
     })
+
+    const { todosList } = useTodos()    
 </script>
