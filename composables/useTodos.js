@@ -1,4 +1,4 @@
-import todosListDummy from '~~/assets/data/todos.json';
+import todosListDummy from '~/assets/data/todos.json';
 
 export const useTodos = () => {
 
