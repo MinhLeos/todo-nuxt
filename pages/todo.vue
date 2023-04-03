@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <TodoList></TodoList>
+    <div>
+        <NuxtPage />
     </div>
 </template>
 

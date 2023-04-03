@@ -1,32 +1,31 @@
 <template>
-    <!-- Todo Item -->
-    <div class="w-[70%] lg:w-[50%] mx-auto my-24 ">
-        <div v-if="todo" class="shadow border w-full overflow-hidden mb-5 cursor-pointer">
-            <div class="flex items-center justify-center my-6">
-                <h4 class="text-center text-2xl mr-10">{{ todo.name }}</h4>
-                <p :class="status.class" class="bg-[blue] text-white rounded-full px-4">{{ status.title }}</p>
+    <h2 class="text-center text-3xl text-[cadetblue] my-8">Todo Details</h2>
+    <Wrapper>
+        <div v-if="todo" class="todo-details">
+            <div class="todo-details-header">
+                <h4 class="">{{ todo.name }}</h4>
+                <p :class="status.class" class="">{{ status.title }}</p>
             </div>
-            <div class="mx-10 mb-4">
-                <ul>
+            <div class="todo-details-des">
+                <ul class="text-start">
                     <li class="" v-for="des in listDes" :key="des">{{ des }}</li>
                 </ul>
             </div>
             <p class="text-center">id: {{ todo.id }}</p>
             <p class="text-center mb-4">Created at: <i>{{ new Date(todo.createdAt).toISOString() }}</i></p>
-            <div class="flex items-center justify-center mb-4">
+            <!-- <div class="flex items-center justify-center mb-4">
                 <button class="w-[100px] block mr-4 bg-[blue] text-white">Edit</button>
                 <button class="w-[100px] block mr-4 bg-[red] text-white">Delete</button>
-            </div>
+            </div> -->
         </div>
-    </div>
-    <!-- Todo Item -->
+    </Wrapper>
 </template>
 
 <script setup>
     const route = useRoute()
     const todoId = route.params.id
     const { findOneById } = useTodos() 
-    const todo = findOneById(+todoId)
+    const todo = findOneById(todoId)
 
     if(!todo){
         throw createError({
@@ -55,3 +54,7 @@
         return ['']
     });
 </script>
+
+<style lang="scss" scoped>
+@import '../../../assets/scss/todo-details.scss'
+</style>

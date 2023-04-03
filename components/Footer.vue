@@ -1,7 +1,21 @@
 <template>
-    <footer class="fixed bottom-0 left-0 right-0 h-24 bg-[cadetblue] shadow-md border-t-[16px] border-solid border-white z-50">
-        <div class="w-[90%] mx-auto pt-8">
-            <p class="text-center text-white text-2xl">Footer</p>
+    <footer class="footer">
+        <div class="footer-div">
+            <p class="footer-div-all">Total: {{ todoLength.length }}</p>
+            <p class="footer-div-done">Done: {{ todoLength.doneLength }}</p>
         </div>
     </footer>
 </template>
+
+<script setup>
+    const { todosList, getTodosLength } = useTodos()
+    const todoLength = reactive({length: 0, doneLength: 0})
+    watch(todosList, () => {
+        todoLength.length = getTodosLength().length
+        todoLength.doneLength = getTodosLength().doneLength
+    }, {immediate: true})
+</script>
+
+<style lang="scss" scoped>
+@import '../assets/scss/footer.scss'
+</style>

@@ -1,0 +1,7 @@
+.side-bar {
+    @apply sticky top-[230px] shadow border w-64 ml-24 xxl:ml-0 min-w-[200px] max-h-[196px];
+
+    &-div {
+       @apply p-5 flex justify-between cursor-pointer active:opacity-50 active:bg-[#f2f2f2] border-b;
+    }
+}

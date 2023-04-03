@@ -1,51 +1,60 @@
 <template>
-  <!-- Todo Item -->
-  <div class="shadow border w-[80%] mx-auto overflow-hidden mb-5">
-    <div class="flex items-center justify-center my-6">
-      <h4
-        @click="showDetails"
-        class="text-center text-xl text-[#b3b3b3] mr-10 cursor-pointer active:opacity-50 active:text-white"
-      >
-        {{ props.todo.name }}
-      </h4>
-      <p
-        :class="status.class"
-        class="bg-[blue] text-white rounded-full px-4 cursor-pointer active:opacity-50"
-      >
-        {{ status.title }}
-      </p>
-    </div>
-    <div class="mx-8 mb-4 h-[30px] px-10 overflow-hidden">
-      <ul>
-          <li class="truncate" v-for="des in listDes" :key="des">{{ des }}</li>
-      </ul>
-    </div>
-    <p class="text-center">id: {{ props.todo.id }}</p>
-    <p class="text-center mb-4">
-      Created at: <i>{{ new Date(props.todo.createdAt).toISOString() }}</i>
-    </p>
-    <div class="flex items-center justify-center mb-4">
-      <button
-        class="w-[100px] block mr-4 bg-[blue] text-white active:opacity-50"
-      >
-        Edit
-      </button>
-      <button
-        class="w-[100px] block mr-4 bg-[red] text-white active:opacity-50"
-      >
-        Delete
-      </button>
-    </div>
-  </div>
-  <!-- Todo Item -->
+  <Dialog :open="isShowDialog.todoIsDone" @close="confirmError" title="Edit">
+      <template #default>
+          <p>Unable to edit task done</p>
+          <p>You cannot edit a task that has been completed before reopening the task.</p>
+      </template>
+      <template #actions>
+          <Button @click="confirmError">Okay</Button>
+      </template>
+  </Dialog>
+  <Dialog :open="isShowDialog.isDelete" @close="confirmDelete(false)" title="Delete">
+      <template #default>
+          <p id="next-tick" ref="nextTickDOM">You definitely want to delete this task?</p>
+          <p>This will delete the data from memory and cannot be recovered. Are you sure you still want to continue?</p>
+      </template>
+      <template #actions>
+          <Button @click="confirmDelete(false)">Cancel</Button>
+          <Button @click="confirmDelete(true)">Delete</Button>
+      </template>
+  </Dialog>
+  <Wrapper>
+      <div class="todo-item-title">
+          <h3 @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
+          <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
+      </div>
+      <div @click="showDetails" class="todo-item-description cursor-pointer">
+          <p class="truncate" v-for="des in listDes" :key="des">{{ des }}</p>
+      </div>
+      <p class="mt-4"><i>{{ new Date(props.todo.createdAt).toISOString() }}</i></p>
+      <p><i>Id: {{ props.todo.id }}</i></p>
+      <div class="mt-8">
+          <Button title="Edit" action="edit" @click="handleClickEdit"></Button>
+          <Button title="Delete" action="delete" :disable="isDisable" @click="deleteClick"></Button>
+      </div>
+  </Wrapper>
 </template>
 
 <script setup>
-const props = defineProps(["todo"]);
+const props = defineProps(['todo', 'length']);
+const emit = defineEmits(['delete'])
+
 const isShowDialog = reactive({
     todoIsDone: false,
     isDelete: false
 })
+
+const isDisable = ref(false)
+watch(() => props.length, (newValue) => {
+    if (newValue === 1) {
+        isDisable.value = true
+    }
+}, {immediate: true})
+
+const { todosList, changeStatus } = useTodos()
+function handleChangeStatus() {
+  changeStatus(props.todo.id)
+}
 
 const listDes = computed(() => {
   const list = props.todo.description.split("\n");
@@ -66,11 +75,43 @@ const status = computed(() => {
 
 const router = useRouter();
 
-function showDetails() {
-  if (props.isDone) {
+function handleClickEdit() {
+  if (props.todo.isDone) {
     isShowDialog.todoIsDone = true;
     return;
   }
+  router.push("/todo/" + props.todo.id + "/edit");
+}
+
+function showDetails() {
   router.push("/todo/" + props.todo.id + "/details");
 }
+function confirmError() {
+    isShowDialog.todoIsDone = false
+}
+
+function deleteClick() {
+    if (todosList.length === 1) {
+        return
+    }
+    isShowDialog.isDelete = true
+
+    nextTick(() => {
+      const element = document.querySelector('#next-tick')
+      if (element && isShowDialog.isDelete === true) {
+          element.style.color = 'red'
+      }
+    })
+}
+function confirmDelete(confirm) {
+    isShowDialog.isDelete = false
+    if (confirm) {
+        emit('delete', props.todo.id)
+    }
+}
 </script>
+
+
+<style lang="scss" scoped>
+    @import '../../assets/scss/todo-item.scss';
+</style>

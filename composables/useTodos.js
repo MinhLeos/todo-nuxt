@@ -37,12 +37,15 @@ export const useTodos = () => {
     }
 
     function findOneById(id) {
-        const findTodo = todosList.find(todo => todo.id === id)
-        console.log('todosList', todosList)
-        console.log('id', id)
-        console.log('findTodo', findTodo)
+        const findTodo = todosList.find(todo => todo.id == id)
         return findTodo
     }
 
-    return { todosList: shallowReadonly(todosList), addTodo, deleteOneTodo, editTodo, changeStatus, findOneById }
+    function getTodosLength() {
+        const length = todosList.length
+        const doneLength = todosList.filter(todo => todo.isDone === true).length
+        return { length, doneLength }
+    }
+
+    return { todosList: shallowReadonly(todosList), getTodosLength, addTodo, deleteOneTodo, editTodo, changeStatus, findOneById }
 }

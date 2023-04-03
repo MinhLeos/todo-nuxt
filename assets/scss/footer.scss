@@ -1,0 +1,15 @@
+.footer {
+    @apply fixed bottom-0 left-0 right-0 h-24 bg-[cadetblue] z-50;
+
+    &-div {
+        @apply flex justify-center w-[90%] mx-auto pt-8;
+
+        &-all {
+            @apply mr-8 text-blue-600/100;
+        }
+    
+        &-done {
+            @apply text-[#50d71e];
+        }
+    }
+}
