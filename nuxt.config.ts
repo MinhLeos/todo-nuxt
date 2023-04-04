@@ -18,5 +18,8 @@ export default defineNuxtConfig({
     buildModules: [
         '@nuxtjs/style-resources',
     ],
-    srcDir: 'src/'
+    srcDir: 'src/',
+    hooks: {
+        'build:done': () => { console.log('Nuxt Hooks') }
+      }
 })
