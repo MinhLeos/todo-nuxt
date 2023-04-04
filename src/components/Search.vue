@@ -10,12 +10,23 @@
 
 <script setup>
     const searchValue = ref()
+    const search = useState('search', () => '')
+    const isSearch = useState('is-search', () => false)
+    // function handleSearch() {
+    //     if(searchValue.value.value.trim() === ''){
+    //         alert('Please entered todo title')
+    //         return
+    //     }
+    //     navigateTo(`/todos-list?search=search&searchValue=${searchValue.value.value.trim()}`)
+    // }
     function handleSearch() {
         if(searchValue.value.value.trim() === ''){
             alert('Please entered todo title')
             return
         }
-        navigateTo(`/todos-list?search=search&searchValue=${searchValue.value.value.trim()}`)
+        search.value = searchValue.value.value.trim()
+        isSearch.value = true
+        navigateTo(`/todos-list`)
     }
     function handleEnterSearch(e){
         if (e.keyCode == 13) {

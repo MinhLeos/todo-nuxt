@@ -1,6 +1,6 @@
 <template>
     <div class="mt-24 flex">
-        <TodoSideBar :filter="filterValue"></TodoSideBar>
+        <TodoSideBar :filter="filter"></TodoSideBar>
         <div v-if="todoListCurrent.length > 0" class="list-todo-item">
             <TodoItem 
                 v-for="todo in todoListCurrent" 
@@ -25,49 +25,78 @@
 <script setup>
     // import ItemTodo from '../Todo/Item.vue'
     const route = useRoute()
-    const filterValue = ref(route.query.filterValue || '')
-    const isFilter = ref(!!route.query.filter)
-    const searchValue = ref(route.query.searchValue || '')
-    const isSearch = ref(!!route.query.search)
+    // const filterValue = ref(route.query.filterValue || '')
+    // const isFilter = ref(!!route.query.filter)
+    // const searchValue = ref(route.query.searchValue || '')
+    // const isSearch = ref(!!route.query.search)
     const { todosList, deleteOneTodo } = useTodos()    
     const todoListCurrent = ref(todosList)
 
+    const search = useState('search')
+    const isSearch = useState('is-search')
+    const filter = useState('filter')
+    const isFilter = useState('is-filter')
+
     watchEffect(() => {
-
-        // filter
-        filterValue.value = route.query.filterValue || ''
-        isFilter.value = !!route.query.filter
-
-        if (isFilter.value && filterValue.value) { 
+        if (!!search.value && isSearch.value) {
             const list = todosList.filter(todo => {
-                if (todo.isDone && filterValue.value.trim().toLowerCase() === 'done') {
+                return todo.name.toLowerCase().includes(search.value.trim().toLowerCase())
+            })
+            todoListCurrent.value = list
+        } else {
+            todoListCurrent.value = todosList
+        }
+
+        if (!!filter.value && isFilter.value) {
+            const list = todoListCurrent.value.filter(todo => {
+                if (todo.isDone && filter.value.trim().toLowerCase() === 'done') {
                     return true
                 }
-                if (!todo.isDone && filterValue.value.trim().toLowerCase() === 'new') {
+                if (!todo.isDone && filter.value.trim().toLowerCase() === 'new') {
                     return true
                 }
                 return false
             })
             todoListCurrent.value = list
-        } else if (!isFilter.value && !filterValue.value) {
-            todoListCurrent.value = todosList
         }
     })
 
-    watchEffect(() => {
-        //Search
-        searchValue.value = route.query.searchValue || ''
-        isSearch.value = !!route.query.search
+    // watchEffect(() => {
 
-        if (isSearch.value && searchValue.value) { 
-            const list = todosList.filter(todo => {
-                return todo.name.toLowerCase().includes(searchValue.value.trim().toLowerCase())
-            })
-            todoListCurrent.value = list
-        } else if (!isSearch.value && !searchValue.value) {
-            todoListCurrent.value = todosList
-        }
-    })
+    //     // filter
+    //     filterValue.value = route.query.filterValue || ''
+    //     isFilter.value = !!route.query.filter
+
+    //     if (isFilter.value && filterValue.value) { 
+    //         const list = todosList.filter(todo => {
+    //             if (todo.isDone && filterValue.value.trim().toLowerCase() === 'done') {
+    //                 return true
+    //             }
+    //             if (!todo.isDone && filterValue.value.trim().toLowerCase() === 'new') {
+    //                 return true
+    //             }
+    //             return false
+    //         })
+    //         todoListCurrent.value = list
+    //     } else if (!isFilter.value && !filterValue.value) {
+    //         todoListCurrent.value = todosList
+    //     }
+    // })
+
+    // watchEffect(() => {
+    //     //Search
+    //     searchValue.value = route.query.searchValue || ''
+    //     isSearch.value = !!route.query.search
+
+    //     if (isSearch.value && searchValue.value) { 
+    //         const list = todosList.filter(todo => {
+    //             return todo.name.toLowerCase().includes(searchValue.value.trim().toLowerCase())
+    //         })
+    //         todoListCurrent.value = list
+    //     } else if (!isSearch.value && !searchValue.value) {
+    //         todoListCurrent.value = todosList
+    //     }
+    // })
 
     function deleteTodoItem(id) {
         if (todosList.length === 1) {
