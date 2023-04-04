@@ -18,4 +18,5 @@ export default defineNuxtConfig({
     buildModules: [
         '@nuxtjs/style-resources',
     ],
+    srcDir: 'src/'
 })
