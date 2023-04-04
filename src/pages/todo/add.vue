@@ -9,9 +9,20 @@
         </template>
     </Dialog>
     <h2 class="edit-todo-header text-center text-2xl mt-4" :class="classAdd">Add Todo</h2>
-    <Wrapper>
+    <!-- <Wrapper>
         <form class="edit-todo-form">
+            <Input input-name="add-todo-name" :input-value="todoName" @change-input="handleChangeInput"></Input>
+            <div class="edit-todo-form-div">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" v-model="todoDescription"></textarea>
+            </div>
+        </form>
+        <Button @click="handleSubmitEdit" title="Save"></Button>
+    </Wrapper> -->
 
+    <!-- use custom layout -->
+    <NuxtLayout name="wrapper">
+        <form class="edit-todo-form">
             <!-- <div class="edit-todo-form-div">
                 <label for="name">Name</label>
                 <input id="name" name="name" v-model="todoName" v-focus/>
@@ -23,49 +34,49 @@
             </div>
         </form>
         <Button @click="handleSubmitEdit" title="Save"></Button>
-    </Wrapper>
+    </NuxtLayout>
 </template>
 
 <script setup>
-    const router = useRouter()
-    const todoName = ref('')
-    const todoDescription = ref('')
-    const inputIsInvalid = ref(false)
-    const classAdd = ref('')
-    const { addTodo } = useTodos()
+const router = useRouter()
+const todoName = ref('')
+const todoDescription = ref('')
+const inputIsInvalid = ref(false)
+const classAdd = ref('')
+const { addTodo } = useTodos()
 
-    async function handleSubmitEdit() {
-        if (todoName.value.trim() === '' || todoDescription.value.trim() === '') {
-            inputIsInvalid.value = true
-            return
+async function handleSubmitEdit() {
+    if (todoName.value.trim() === '' || todoDescription.value.trim() === '') {
+        inputIsInvalid.value = true
+        return
+    }
+    addTodo(todoName.value, todoDescription.value)
+    router.push('/todos-list')
+}
+function confirmError() {
+    inputIsInvalid.value = false
+}
+
+function handleChangeInput(inputValue) {
+    todoName.value = inputValue
+}
+
+// demo use lifecycle hooks : onMounted và onUnmounted
+let timer
+onMounted(() => {
+    timer = setInterval(() => {
+        if (classAdd.value) {
+            classAdd.value = ''
+        } else {
+            classAdd.value = 'change-color'
         }
-        addTodo(todoName.value, todoDescription.value)
-        router.push('/todos-list')
+    }, 1000)
+})
+onUnmounted(() => {
+    if (timer) {
+        clearInterval(timer)
     }
-    function confirmError() {
-        inputIsInvalid.value = false
-    }
-
-    function handleChangeInput(inputValue) {
-        todoName.value = inputValue
-    }
-
-    // demo use lifecycle hooks : onMounted và onUnmounted
-    let timer
-    onMounted(() => {
-        timer = setInterval(() => {
-            if (classAdd.value) {
-                classAdd.value = ''
-            } else {
-                classAdd.value = 'change-color'
-            }
-        }, 1000)
-    })
-    onUnmounted(() => {
-        if (timer) {
-            clearInterval(timer)
-        }
-    })
+})
 </script>
 
 <style lang="scss" scoped>

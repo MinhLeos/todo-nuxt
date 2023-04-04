@@ -1,6 +1,23 @@
 <template>
     <h2 class="text-center text-3xl text-[cadetblue] my-8">Todo Details</h2>
-    <Wrapper>
+    <!-- <Wrapper>
+        <div v-if="todo" class="todo-details">
+            <div class="todo-details-header">
+                <h4 class="">{{ todo.name }}</h4>
+                <p :class="status.class" class="">{{ status.title }}</p>
+            </div>
+            <div class="todo-details-des">
+                <ul class="text-start">
+                    <li class="" v-for="des in listDes" :key="des">{{ des }}</li>
+                </ul>
+            </div>
+            <p class="text-center">id: {{ todo.id }}</p>
+            <p class="text-center mb-4">Created at: <i>{{ new Date(todo.createdAt).toISOString() }}</i></p>
+        </div>
+    </Wrapper> -->
+
+    <!-- use Custom layout -->
+    <NuxtLayout name="wrapper">
         <div v-if="todo" class="todo-details">
             <div class="todo-details-header">
                 <h4 class="">{{ todo.name }}</h4>
@@ -18,7 +35,7 @@
                 <button class="w-[100px] block mr-4 bg-[red] text-white">Delete</button>
             </div> -->
         </div>
-    </Wrapper>
+    </NuxtLayout>
 </template>
 
 <script setup>

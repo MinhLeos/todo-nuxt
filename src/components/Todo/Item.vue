@@ -18,7 +18,7 @@
           <Button @click="confirmDelete(true)">Delete</Button>
       </template>
   </Dialog>
-  <Wrapper>
+  <!-- <Wrapper>
       <div class="todo-item-title">
           <h3 @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
           <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
@@ -32,7 +32,24 @@
           <Button title="Edit" action="edit" @click="handleClickEdit"></Button>
           <Button title="Delete" action="delete" :disable="isDisable" @click="deleteClick"></Button>
       </div>
-  </Wrapper>
+  </Wrapper> -->
+
+  <!-- use Custom layout -->
+  <NuxtLayout name="wrapper">
+      <div class="todo-item-title">
+          <h3 @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
+          <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
+      </div>
+      <div @click="showDetails" class="todo-item-description cursor-pointer">
+          <p class="truncate" v-for="des in listDes" :key="des">{{ des }}</p>
+      </div>
+      <p class="mt-4"><i>{{ new Date(props.todo.createdAt).toISOString() }}</i></p>
+      <p><i>Id: {{ props.todo.id }}</i></p>
+      <div class="mt-8">
+          <Button title="Edit" action="edit" @click="handleClickEdit"></Button>
+          <Button title="Delete" action="delete" :disable="isDisable" @click="deleteClick"></Button>
+      </div>
+  </NuxtLayout>
 </template>
 
 <script setup>

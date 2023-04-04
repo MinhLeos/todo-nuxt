@@ -9,7 +9,19 @@
         </template>
     </Dialog>
     <h2 class="edit-todo-header text-4xl text-center text-[#8797a5]">Edit Todo</h2>
-    <Wrapper>
+    <!-- <Wrapper>
+        <form class="edit-todo-form">
+            <Input :input-value="name" input-name="edit-todo-name" @change-input="changeName"></Input>
+            <div class="edit-todo-form-div">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" @input="changeDescription">{{ description }}</textarea>
+            </div>
+        </form>
+        <Button @click="handleSubmitEdit" title="Save"></Button>
+    </Wrapper> -->
+
+    <!-- use Custom layout -->
+    <NuxtLayout name="wrapper">
         <form class="edit-todo-form">
 
             <!-- <div class="edit-todo-form-div">
@@ -23,7 +35,7 @@
             </div>
         </form>
         <Button @click="handleSubmitEdit" title="Save"></Button>
-    </Wrapper>
+    </NuxtLayout>
 </template>
 
 <script setup>
