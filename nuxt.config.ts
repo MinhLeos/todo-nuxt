@@ -19,7 +19,12 @@ export default defineNuxtConfig({
         '@nuxtjs/style-resources',
     ],
     srcDir: 'src/',
+    app: {
+        pageTransition: { name: 'page', mode: 'default' },
+        layoutTransition: { name: 'layout', mode: 'default' }
+    },
     hooks: {
+        'build:before': () => { console.log('Nuxt Hooks before') },
         'build:done': () => { console.log('Nuxt Hooks') }
-      }
+    }
 })
