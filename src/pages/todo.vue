@@ -7,6 +7,7 @@
 
 <script setup>
     definePageMeta({
-        layout: "custom"
+        layout: "custom",
+        middleware: 'admin'
     })
 </script>

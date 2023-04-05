@@ -41,6 +41,13 @@
 </template>
 
 <script setup>
+//Route Validate
+// definePageMeta({
+//   validate: async (route) => {
+//     // Check if the id is made up of digits
+//     return /^\d+$/.test(route.params.id)
+//   }
+// })
 const route = useRoute()
 const router = useRouter()
 const { todosList, editTodo, findOneById } = useTodos()

@@ -7,6 +7,7 @@
 <script setup>
     // use custom layout
     definePageMeta({
-        layout: "custom"
+        layout: "custom",
+        middleware: 'auth'
     })
 </script>

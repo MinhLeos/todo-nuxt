@@ -8,6 +8,11 @@
   </div>
   <!-- <Footer></Footer> -->
 </template>
+
+<script setup>
+  const path = useState('path', () => '/')
+</script>
+
 <style>
 .page-enter-active,
 .page-leave-active {
