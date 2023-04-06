@@ -2,8 +2,8 @@ import todosListDummy from '~/assets/data/todos.json';
 
 export const useTodos = () => {
 
-    // use useState
-    const todosList12 = useState('init-todos', () => todosListDummy)
+    // use useState //const todosList12 = useState('init-todos', () => todosListDummy)
+   
     const todosList = reactive(todosListDummy)
 
     function deleteOneTodo(id) {

@@ -106,8 +106,9 @@ function handleClickEdit() {
 }
 
 function showDetails() {
-    isLoaded.value = false
-    router.push("/todo/" + props.todo.id + "/details");
+    // isLoaded.value = false
+    // router.push("/todo/" + props.todo.id + "/details");
+    router.push("/");
 }
 function confirmError() {
     isShowDialog.todoIsDone = false

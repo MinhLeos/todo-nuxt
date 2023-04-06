@@ -49,11 +49,6 @@ const todoId = route.params.id
 const { findOneById } = useTodos()
 const todo = findOneById(todoId)
 
-const isLoaded = useState('is-loaded', () => false)
-if (!isLoaded.value) {
-    navigateTo('/')
-}
-
 if (!todo) {
     navigateTo('/error')
     // throw createError({

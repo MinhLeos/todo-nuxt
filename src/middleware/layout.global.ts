@@ -1,7 +1,10 @@
 export default defineNuxtRouteMiddleware((to, from) => {
     const isHaveTodoPath = to.path.includes('/todo/')
-    console.log('isHaveTodoPath', isHaveTodoPath)
     if(isHaveTodoPath) {
       to.meta.layout = 'custom'
+    }
+    const isLoaded = useState('is-loaded')
+    if (!isLoaded.value && to.path !== '/') {
+       return navigateTo('/')
     }
   })
