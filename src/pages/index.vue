@@ -13,12 +13,11 @@
 </template>
 
 <script setup>
-const counter = useCounter()
-console.log('counter', counter.value)
+const title = useState('title')
 useHead({
-    title: "Todo App"
+    title: title
 })
-// definePageMeta({
-//     ssr: false
-// })
+definePageMeta({
+    ssr: false
+})
 </script>
