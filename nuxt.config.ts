@@ -22,10 +22,11 @@ export default defineNuxtConfig({
     hooks: {
         'build:done': () => { console.log('Nuxt Hooks') }
     },
-    routeRules: {
-        '/' : {ssr: false}
-    },
-    layout: [
-        {'/error' : false}
-    ]
+    // routeRules: {
+    //     '/' : {ssr: false}
+    // },
+    // layouts: {
+    //     default: '/layouts/default.vue',
+    //     custom: '/layouts/custom.vue',
+    // }
 })

@@ -12,8 +12,9 @@
     &__row {
         display: grid;
         gap: 2px;
-        grid-template-columns: repeat(60, 1fr);
-        grid-template-rows: 1fr 1fr;
+        // grid-template-columns: repeat(60, 1fr);
+        // grid-template-rows: 1fr 1fr;
+        grid-template: 1fr 1fr / repeat(60, 1fr);
     }
 
     &__key {
@@ -23,7 +24,7 @@
         grid-row: span 2;
         border-radius: 3px;
         border: 1px solid gray;
-        transition: .05s background ease-in;
+        // transition: .05s background ease-in;
 
         &:hover {
             opacity: 0.7;
