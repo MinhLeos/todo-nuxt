@@ -42,9 +42,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: "custom"
-})
+// definePageMeta({
+//     layout: "custom"
+// })
 const router = useRouter()
 const todoName = ref('')
 const todoDescription = ref('')

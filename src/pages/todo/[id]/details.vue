@@ -41,9 +41,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: "custom"
-})
+// definePageMeta({
+//     layout: "custom"
+// })
 const route = useRoute()
 const todoId = route.params.id
 const { findOneById } = useTodos()

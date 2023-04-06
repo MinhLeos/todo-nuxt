@@ -43,9 +43,9 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: "custom"
-})
+// definePageMeta({
+//     layout: "custom"
+// })
 const route = useRoute()
 const router = useRouter()
 const { todosList, editTodo, findOneById } = useTodos()
