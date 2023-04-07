@@ -29,6 +29,8 @@
     border: 1px solid gray;
     grid-column: span 4;
     grid-row: 1 / span 2;
+    /* dùng cung với dòng 87 >>> sẽ bỏ dòng 31 */
+    /* grid-row: span 2; */
     text-align: center;
     border-radius: 3px;
 
@@ -80,6 +82,9 @@
 
 .keyboard-key--0 {
     grid-column: 41 / span 4;
+
+    /* dùng cung với dòng 32 >>> sẽ bỏ dòng 31 */
+    /* grid-row: 1 / span 2; */
 }
 
 .keyboard-h--1-left {

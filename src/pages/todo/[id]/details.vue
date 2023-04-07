@@ -44,6 +44,14 @@
 // definePageMeta({
 //     layout: "custom"
 // })
+definePageMeta({
+    validate: async ({ params }) => {
+        console.log('params', params)
+        const { findOneById } = useTodos()
+        const todo = findOneById(params.id)
+        return !!todo
+    }
+})
 const route = useRoute()
 const todoId = route.params.id
 const { findOneById } = useTodos()

@@ -95,6 +95,7 @@
 </template>
 
 <script setup>
+
     const { findOneById } = useTodos()
 
     const numbers = reactive({
@@ -116,22 +117,22 @@
         }
     }
     function handleKeyUp(e) {
-        isLoaded.value = true
-        if (e.keyCode < 48 || e.keyCode > 57) {
-            return
-        }
-        const value = e.keyCode - 48
-        const todo = findOneById(value)
-        if (todo) {
-            numbers[e.keyCode - 48].active = false
-            navigateTo(`/todo/${value}/details`)
-        } else if (!todo) {
-            navigateTo(`/error`)
-        }
-        // if (e.keyCode >= 48 && e.keyCode <= 57) {
-        //     numbers[e.keyCode - 48].active = false
-        //     navigateTo(`/todo/${e.keyCode - 48}/details`)
+        // if (e.keyCode < 48 || e.keyCode > 57) {
+        //     return
         // }
+        isLoaded.value = true
+        // const value = e.keyCode - 48
+        // const todo = findOneById(value)
+        // if (todo) {
+        //     numbers[e.keyCode - 48].active = false
+        //     navigateTo(`/todo/${value}/details`)
+        // } else if (!todo) {
+        //     navigateTo(`/error`)
+        // }
+        if (e.keyCode >= 48 && e.keyCode <= 57) {
+            numbers[e.keyCode - 48].active = false
+            navigateTo(`/todo/${e.keyCode - 48}/details`)
+        }
     }
 
     function handleClick(value) {
@@ -153,6 +154,7 @@
         document.removeEventListener('keydown', handleKeyDown)
         document.removeEventListener('keyup', handleKeyUp)
     })
+
 </script>
 
 <style lang="scss" scoped>

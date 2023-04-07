@@ -13,11 +13,11 @@
 </template>
 
 <script setup>
-// const title = useState('title-client')
+// const title = useState('title-server')
 // useHead({
 //     title: title
 // })
-const title = useState('title-server')
+const title = useState('title-client')
 useHead({
     title: title
 })
