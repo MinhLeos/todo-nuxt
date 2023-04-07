@@ -137,13 +137,14 @@
 
     function handleClick(value) {
         isLoaded.value = true
-        const todo = findOneById(value)
+        navigateTo(`/todo/${value}/details`)
+        // const todo = findOneById(value)
 
-        if (todo) {
-            navigateTo(`/todo/${value}/details`)
-        } else {
-            navigateTo(`/error`)
-        }
+        // if (todo) {
+        //     navigateTo(`/todo/${value}/details`)
+        // } else {
+        //     navigateTo(`/error`)
+        // }
     }
 
     onMounted(() => {
