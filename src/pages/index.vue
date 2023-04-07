@@ -8,7 +8,8 @@
         </div>
     </div> -->
     <div class="mt-24 ml-16 items-center text-center">
-        <NewKeyBoard></NewKeyBoard>
+        <!-- <NewKeyBoard></NewKeyBoard> -->
+        <KeyBoard></KeyBoard>
     </div>
 </template>
 
