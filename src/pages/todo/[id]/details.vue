@@ -49,14 +49,14 @@ const todoId = route.params.id
 const { findOneById } = useTodos()
 const todo = findOneById(todoId)
 
-if (!todo) {
-    navigateTo('/error')
-    // throw createError({
-    //     statusCode: 404,
-    //     message: `Car with id of ${todoId} does not exist`
-    // })
-    // throw new Error('error')
-}
+// if (!todo) {
+//     navigateTo('/error')
+//     // throw createError({
+//     //     statusCode: 404,
+//     //     message: `Car with id of ${todoId} does not exist`
+//     // })
+//     // throw new Error('error')
+// }
 
 const status = computed(() => {
     if (todo.isDone) {

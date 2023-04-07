@@ -95,6 +95,8 @@
 </template>
 
 <script setup>
+    const { findOneById } = useTodos()
+
     const numbers = reactive({
         0: { active: false, id: 'Digit0'},
         1: { active: false, id: 'Digit1'},
@@ -108,7 +110,6 @@
         9: { active: false, id: 'Digit9'},
     })
     const isLoaded = useState('is-loaded')
-
     function handleKeyDown(e) {
         if (e.keyCode >= 48 && e.keyCode <= 57) {
         numbers[e.keyCode - 48].active = true
@@ -116,11 +117,21 @@
     }
     function handleKeyUp(e) {
         isLoaded.value = true
-        if (e.keyCode >= 48 && e.keyCode <= 57) {
-            numbers[e.keyCode - 48].active = false
+        const value = e.keyCode - 48
+        const todo = findOneById(value)
+
+        if (todo) {
             navigateTo(`/todo/${e.keyCode - 48}/details`)
+        } else {
+            navigateTo(`/error`)
         }
+        // if (e.keyCode >= 48 && e.keyCode <= 57) {
+        //     numbers[e.keyCode - 48].active = false
+        //     navigateTo(`/todo/${e.keyCode - 48}/details`)
+        // }
     }
+
+
 
     onMounted(() => {
         document.addEventListener('keydown', handleKeyDown)

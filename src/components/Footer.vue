@@ -16,7 +16,7 @@
     // }, {immediate: true})
 
     //use Plugin
-    const { $todoLength } = useNuxtApp()
+    // const { $todoLength } = useNuxtApp()
 </script>
 
 <style lang="scss" scoped>
