@@ -28,7 +28,7 @@
             <div class="keyboard"><p>7</p></div>
             <div class="keyboard"><p>8</p></div>
             <div class="keyboard"><p>9</p></div> -->
-            <div v-for="(value, key) in numbers" :key="key" :id="value.id" class="keyboard" :class="{active: value.active, 'keyboard-key--0': key == 0}">{{ key }}</div>
+            <div v-for="(value, key) in numbers" :key="key" :id="value.id" class="keyboard" :class="{active: value.active, 'keyboard-key--0': key == 0}" @click="handleClick(key)">{{ key }}</div>
             <div class="keyboard"><p>-</p></div>
             <div class="keyboard"><p>=</p></div>
             <div class="keyboard keyboard-w--8"><p>Backspace</p></div>
@@ -121,7 +121,7 @@
         const todo = findOneById(value)
 
         if (todo) {
-            navigateTo(`/todo/${e.keyCode - 48}/details`)
+            navigateTo(`/todo/${value}/details`)
         } else {
             navigateTo(`/error`)
         }
@@ -131,7 +131,16 @@
         // }
     }
 
+    function handleClick(value) {
+        isLoaded.value = true
+        const todo = findOneById(value)
 
+        if (todo) {
+            navigateTo(`/todo/${value}/details`)
+        } else {
+            navigateTo(`/error`)
+        }
+    }
 
     onMounted(() => {
         document.addEventListener('keydown', handleKeyDown)
