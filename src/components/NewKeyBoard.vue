@@ -117,12 +117,15 @@
     }
     function handleKeyUp(e) {
         isLoaded.value = true
+        if (e.keyCode < 48 || e.keyCode > 57) {
+            return
+        }
         const value = e.keyCode - 48
         const todo = findOneById(value)
-
         if (todo) {
+            numbers[e.keyCode - 48].active = false
             navigateTo(`/todo/${value}/details`)
-        } else {
+        } else if (!todo) {
             navigateTo(`/error`)
         }
         // if (e.keyCode >= 48 && e.keyCode <= 57) {
