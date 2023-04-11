@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  const path = useState('path', () => '/')
+
 </script>
 
 <style>
