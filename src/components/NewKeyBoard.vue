@@ -234,8 +234,13 @@
 <script setup>
 //use pinia
 import { useTodoStore } from '@/stores/todos.js'
+import { useTestStore } from '@/stores/test.js'
 const todoStore = useTodoStore()
-
+const testStore = useTestStore()
+console.log('todoStore', todoStore)
+console.log('testStore', testStore)
+console.log('todoStore.secret', todoStore.secret)
+console.log('testStore.secret', testStore.secret)
 const { findOneById } = useTodos()
 
 const numbers = reactive({
