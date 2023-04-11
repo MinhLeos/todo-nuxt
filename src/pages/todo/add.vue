@@ -45,6 +45,11 @@
 // definePageMeta({
 //     layout: "custom"
 // })
+
+//use pinia
+import { useTodoStore } from '@/stores/todos.js'
+const todoStore = useTodoStore()
+
 const router = useRouter()
 const todoName = ref('')
 const todoDescription = ref('')
@@ -52,14 +57,24 @@ const inputIsInvalid = ref(false)
 const classAdd = ref('')
 const { addTodo } = useTodos()
 
+//use pinia
 async function handleSubmitEdit() {
     if (todoName.value.trim() === '' || todoDescription.value.trim() === '') {
         inputIsInvalid.value = true
         return
     }
-    addTodo(todoName.value, todoDescription.value)
+    todoStore.addTodo(todoName.value, todoDescription.value)
     router.push('/todos-list')
 }
+
+// async function handleSubmitEdit() {
+//     if (todoName.value.trim() === '' || todoDescription.value.trim() === '') {
+//         inputIsInvalid.value = true
+//         return
+//     }
+//     addTodo(todoName.value, todoDescription.value)
+//     router.push('/todos-list')
+// }
 function confirmError() {
     inputIsInvalid.value = false
 }

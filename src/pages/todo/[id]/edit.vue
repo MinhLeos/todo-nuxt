@@ -46,13 +46,28 @@
 // definePageMeta({
 //     layout: "custom"
 // })
+
+//use pinia
+import { useTodoStore } from '@/stores/todos.js'
+const todoStore = useTodoStore()
+function handleSubmitEdit() {
+    if (name.value.trim() === '' || description.value.trim() === '') {
+        inputIsInvalid.value = true
+        return
+    }
+    todoStore.editTodo(todoId, name.value, description.value)
+    router.push('/todos-list')
+}
+
 const route = useRoute()
 const router = useRouter()
 const { todosList, editTodo, findOneById } = useTodos()
 const todoId = route.params.id
 
 const inputIsInvalid = ref(false)
-const todo = findOneById(todoId)
+// const todo = findOneById(todoId)
+//use pinia
+const todo = todoStore.findOneById(todoId)
 if (!todo) {
     throw createError({
         statusCode: 404,
@@ -69,14 +84,14 @@ function changeName(inputValue) {
 function changeDescription(event) {
     description.value = event.target.value
 }
-function handleSubmitEdit() {
-    if (name.value.trim() === '' || description.value.trim() === '') {
-        inputIsInvalid.value = true
-        return
-    }
-    editTodo(todoId, name.value, description.value)
-    router.push('/todos-list')
-}
+// function handleSubmitEdit() {
+//     if (name.value.trim() === '' || description.value.trim() === '') {
+//         inputIsInvalid.value = true
+//         return
+//     }
+//     editTodo(todoId, name.value, description.value)
+//     router.push('/todos-list')
+// }
 function confirmError() {
     inputIsInvalid.value = false
 }

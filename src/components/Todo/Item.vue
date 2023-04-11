@@ -56,6 +56,14 @@
 </template>
 
 <script setup>
+//use pinia
+import { useTodoStore } from '@/stores/todos.js'
+const todoStore = useTodoStore()
+function handleChangeStatus() {
+    todoStore.changeStatus(props.todo.id)
+}
+
+
 const props = defineProps(['todo', 'length']);
 const emit = defineEmits(['delete'])
 
@@ -74,9 +82,9 @@ watch(() => props.length, (newValue) => {
 }, { immediate: true })
 
 const { todosList, changeStatus } = useTodos()
-function handleChangeStatus() {
-    changeStatus(props.todo.id)
-}
+// function handleChangeStatus() {
+//     changeStatus(props.todo.id)
+// }
 
 const listDes = computed(() => {
     const list = props.todo.description.split("\n");
@@ -115,7 +123,7 @@ function confirmError() {
 }
 
 function deleteClick() {
-    if (todosList.length === 1) {
+    if (todoStore.todosList.length === 1) {
         return
     }
     isShowDialog.isDelete = true

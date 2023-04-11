@@ -24,27 +24,33 @@
 </template>
 <script setup>
     // import ItemTodo from '../Todo/Item.vue'
+
+    //use pinia
+    import { useTodoStore } from '@/stores/todos.js'
+    const todoStore = useTodoStore()
+
     const route = useRoute()
     // const filterValue = ref(route.query.filterValue || '')
     // const isFilter = ref(!!route.query.filter)
     // const searchValue = ref(route.query.searchValue || '')
     // const isSearch = ref(!!route.query.search)
     const { todosList, deleteOneTodo } = useTodos()    
-    const todoListCurrent = ref(todosList)
+    const todoListCurrent = ref(todoStore.todosList)
 
     const search = useState('search')
     const isSearch = useState('is-search')
     const filter = useState('filter')
     const isFilter = useState('is-filter')
 
+    //use pinia
     watchEffect(() => {
         if (!!search.value && isSearch.value) {
-            const list = todosList.filter(todo => {
+            const list = todoStore.todosList.filter(todo => {
                 return todo.name.toLowerCase().includes(search.value.trim().toLowerCase())
             })
             todoListCurrent.value = list
         } else {
-            todoListCurrent.value = todosList
+            todoListCurrent.value = todoStore.todosList
         }
 
         if (!!filter.value && isFilter.value) {
@@ -60,6 +66,36 @@
             todoListCurrent.value = list
         }
     })
+    function deleteTodoItem(id) {
+        if (todoStore.todosList.length === 1) {
+            return
+        }
+        todoStore.deleteOneTodo(id)
+    }
+
+    // watchEffect(() => {
+    //     if (!!search.value && isSearch.value) {
+    //         const list = todosList.filter(todo => {
+    //             return todo.name.toLowerCase().includes(search.value.trim().toLowerCase())
+    //         })
+    //         todoListCurrent.value = list
+    //     } else {
+    //         todoListCurrent.value = todosList
+    //     }
+
+    //     if (!!filter.value && isFilter.value) {
+    //         const list = todoListCurrent.value.filter(todo => {
+    //             if (todo.isDone && filter.value.trim().toLowerCase() === 'done') {
+    //                 return true
+    //             }
+    //             if (!todo.isDone && filter.value.trim().toLowerCase() === 'new') {
+    //                 return true
+    //             }
+    //             return false
+    //         })
+    //         todoListCurrent.value = list
+    //     }
+    // })
 
     // watchEffect(() => {
 
@@ -98,12 +134,12 @@
     //     }
     // })
 
-    function deleteTodoItem(id) {
-        if (todosList.length === 1) {
-            return
-        }
-        deleteOneTodo(id)
-    }
+    // function deleteTodoItem(id) {
+    //     if (todoStore.todosList.length === 1) {
+    //         return
+    //     }
+    //     deleteOneTodo(id)
+    // }
 </script>
 
 <style lang="scss" scoped>

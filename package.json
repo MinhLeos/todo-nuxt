@@ -21,6 +21,11 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.5",
+    "@pinia/nuxt": "^0.4.8",
+    "pinia": "^2.0.34",
     "sass": "^1.60.0"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
