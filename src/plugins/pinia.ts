@@ -19,6 +19,11 @@ import { PiniaPluginContext } from 'pinia'
 // add a property named `secret` to every store that is created
     // after this plugin is installed this could be in a different file
     function SecretPiniaPlugin({ store }: PiniaPluginContext) {
+      store.$subscribe((mutation) => {
+        // react to store changes
+        console.log(`[🍍 ${mutation.storeId}]: ${mutation.type}.`)
+      })
+    
         return { secret: 'the cake is a lie' }
     }
 
