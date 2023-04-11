@@ -49,6 +49,12 @@ definePageMeta({
         console.log('params', params)
         const { findOneById } = useTodos()
         const todo = findOneById(params.id)
+        if (!todo) {
+            return {
+                statusCode: 404,
+                message: `Car with id of ${params.id} does not exist`
+            }
+        }
         return !!todo
     }
 })
@@ -59,10 +65,10 @@ const todo = findOneById(todoId)
 
 // if (!todo) {
 //     navigateTo('/error')
-//     // throw createError({
-//     //     statusCode: 404,
-//     //     message: `Car with id of ${todoId} does not exist`
-//     // })
+// throw createError({
+//     statusCode: 404,
+//     message: `Car with id of ${todoId} does not exist`
+// })
 //     // throw new Error('error')
 // }
 
