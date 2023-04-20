@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     css: [
         '@/assets/css/style.css',
     ],
-
+    // plugins: [{ src: `~/plugins/tooltip`, mode: 'client'}],
     postcss: {
         plugins: {
             'postcss-import': {},
@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     },
     modules: [
         "@nuxtjs/tailwindcss",
-        '@pinia/nuxt'
+        '@pinia/nuxt',
     ],
     buildModules: [
         '@nuxtjs/style-resources',

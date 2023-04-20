@@ -39,7 +39,7 @@
         <!-- use Custom layout -->
         <NuxtLayout name="wrapper">
             <div class="todo-item-title">
-                <h3 @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
+                <h3 v-tooltip="props.todo.name" @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
                 <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
             </div>
             <div @click="showDetails" class="todo-item-description cursor-pointer">

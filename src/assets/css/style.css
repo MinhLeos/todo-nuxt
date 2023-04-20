@@ -13,3 +13,18 @@
         @apply w-3/6 p-4 text-center my-8 mx-auto bg-[antiquewhite] border border-solid border-transparent rounded-3xl;
     }
 }
+
+.tooltip-custom {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    border: 1px solid #333;
+    padding: 2px 10px;
+    border-radius: 5px;
+    max-width: 10rem;
+    background-color: #ece9e9;
+}
+.tooltip-custom-parent:hover .tooltip-custom {
+    display: block;
+}
