@@ -2,13 +2,13 @@
     <!-- todo side bar -->
     <div class="side-bar">
         <div @click="handleClick('')" class="side-bar-div">
-            <h4 :class="props.filter==='' ? 'text-[red]' : ''">All</h4>
+            <h4 :class="props.filter ==='' ? 'text-[red]' : ''">All</h4>
         </div>
         <div @click="handleClick('new')" class="side-bar-div">
-            <h4 :class="props.filter==='new' ? 'text-[red]' : ''">New</h4>
+            <h4 :class="props.filter ==='new' ? 'text-[red]' : ''">New</h4>
         </div>
         <div @click="handleClick('done')" class="side-bar-div">
-            <h4 :class="props.filter==='done' ? 'text-[red]' : ''">Done</h4>
+            <h4 :class="props.filter ==='done' ? 'text-[red]' : ''">Done</h4>
         </div>
         <div @click="handleCancelSearch" class="side-bar-div">
             <h4>Cancel Search</h4>
@@ -19,31 +19,38 @@
 
 <script setup>
     const props = defineProps(['filter'])
+    // const filterValue = toRef(props, 'filter') || ref('')
 
     const filter = useState('filter', () => '')
     const isFilter = useState('is-filter', () => false)
     const search = useState('search')
     const isSearch = useState('is-search')
-    // function handleClick(value) {
-    //     if(!value) {
-    //         navigateTo(`/todos-list`)
-    //         return
-    //     }
-    //     navigateTo(`/todos-list?filter=filter&filterValue=${value}`)
-    // }
     function handleClick(value) {
-        filter.value = value
-        if (value) {
-            isFilter.value = true
-        } else {
-            isFilter.value = false
+        if(!value) {
+            // filterValue.value = ''
+            navigateTo(`/todos-list`)
+            return
         }
-        // navigateTo(`/todos-list`)
+        // filterValue.value = value
+        navigateTo(`/todos-list?filter=filter&filterValue=${value}`)
     }
     function handleCancelSearch() {
-        search.value = ''
-        isSearch.value = false
+        // filterValue.value = ''
+        navigateTo(`/todos-list`)
     }
+    // function handleClick(value) {
+    //     filter.value = value
+    //     if (value) {
+    //         isFilter.value = true
+    //     } else {
+    //         isFilter.value = false
+    //     }
+    //     // navigateTo(`/todos-list`)
+    // }
+    // function handleCancelSearch() {
+    //     search.value = ''
+    //     isSearch.value = false
+    // }
 </script>
 
 <style lang="scss" scoped>
