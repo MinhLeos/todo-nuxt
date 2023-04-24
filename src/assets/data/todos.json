@@ -1,7 +1,7 @@
 [
     {
       "id": 1,
-      "name": "Learn VueJS",
+      "name": "Learn VueJS Learn VueJS Learn VueJS Learn VueJS",
       "createdAt": "2023-03-21T15:15:30Z",
       "isDone": false,
       "description": "Vue is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex."
@@ -15,14 +15,14 @@
     },
     {
       "id": 3,
-      "name": "Learn ReactJS",
+      "name": "Learn ReactJS Learn ReactJS",
       "createdAt": "2023-03-23T15:15:30Z",
       "isDone": true,
       "description": "ReactJS is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex."
     },
     {
       "id": 4,
-      "name": "Learn NextJS",
+      "name": "Learn NextJS Learn NextJS Learn NextJS",
       "createdAt": "2023-03-24T15:15:30Z",
       "isDone": false,
       "description": "NextJS is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex."

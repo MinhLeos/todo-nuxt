@@ -3,7 +3,10 @@ export default defineNuxtConfig({
     css: [
         '@/assets/css/style.css',
     ],
-    // plugins: [{ src: `~/plugins/tooltip`, mode: 'client'}],
+    plugins: [
+        // { src: `~/plugins/tooltip`, mode: 'client'},
+        { src: `~/plugins/noti.client`, mode: 'client'},
+    ],
     postcss: {
         plugins: {
             'postcss-import': {},

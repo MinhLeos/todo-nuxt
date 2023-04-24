@@ -39,7 +39,7 @@
         <!-- use Custom layout -->
         <NuxtLayout name="wrapper">
             <div class="todo-item-title">
-                <h3 v-tooltip="props.todo.name" @click="showDetails" class="text-[#50d71e] cursor-pointer">{{ props.todo.name }}</h3>
+                <h3 v-tooltip="tooltip" @click="showDetails" class="text-[#50d71e] cursor-pointer truncate">{{ props.todo.name }}</h3>
                 <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
             </div>
             <div @click="showDetails" class="todo-item-description cursor-pointer">
@@ -64,14 +64,23 @@ function handleChangeStatus() {
 }
 
 
-const props = defineProps(['todo', 'length']);
+const props = defineProps(['todo', 'length', 'index']);
 const emit = defineEmits(['delete'])
 
 const isLoaded = useState('is-loaded')
 
 const isShowDialog = reactive({
     todoIsDone: false,
-    isDelete: false
+    isDelete: false,
+})
+
+const tooltip = computed(() => {
+    return {
+        title: props.todo.name,
+        position: 'top',
+        isFirst: props.index == 0,
+        color: '#333'
+    }
 })
 
 const isDisable = ref(false)

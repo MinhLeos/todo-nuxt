@@ -3,7 +3,8 @@
         <TodoSideBar :filter="filter"></TodoSideBar>
         <div v-if="todoListCurrent.length > 0" class="list-todo-item">
             <TodoItem 
-                v-for="todo in todoListCurrent" 
+                v-for="(todo, index) in todoListCurrent" 
+                :index="index"
                 :key="todo.id" 
                 :todo="todo" 
                 :length="todosList.length"
