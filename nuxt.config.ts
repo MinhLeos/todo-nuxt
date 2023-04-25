@@ -5,8 +5,10 @@ export default defineNuxtConfig({
     ],
     plugins: [
         // { src: `~/plugins/tooltip`, mode: 'client'},
-        { src: `~/plugins/noti/index.ts`, mode: 'client'},
+        // { src: `~/plugins/noti/index.ts`, mode: 'client'},
         { src: `~/plugins/old/notification.ts`, mode: 'client'},
+        { src: `~/plugins/plugin.client.ts`, mode: 'server'},
+        { src: `~/plugins/plugin.server.ts`, mode: 'client'},
     ],
     postcss: {
         plugins: {
