@@ -1,5 +1,5 @@
 <template>
-    <div ref="el" class="flex justify-between text-[#fff] p-3 min-w-[300px] max-w-[700px] items-start" :class="customClass">
+    <div @mouseenter.stop="handleMouseEnter" @mouseleave.stop="handleMouseLeave" ref="el" class="flex justify-between text-[#fff] p-3 min-w-[300px] max-w-[700px] items-start" :class="customClass">
         <div>
             <h4>{{props.title}}</h4>
             <p>{{props.content}} - {{props.count}}</p>
@@ -22,7 +22,6 @@
         return classes
     })
     function handleClose(e) {
-        console.log('close', e.target.parentNode.parentNode)
         e.target?.parentNode?.parentNode?.remove()
         const divContainer = document.querySelector('.noti-container')
         const divNoti = document.querySelector('.notification')
@@ -32,10 +31,23 @@
         // document.querySelector(".notification")?.remove();
     }
     let timer
+
+    function handleMouseEnter() {
+        if(timer) {
+            clearTimeout(timer)
+        }
+    }
+    function handleMouseLeave() {
+        if(props.timeout){
+            timer = setTimeout(() => {
+                el.value?.parentNode?.remove();
+            }, props.timeout);
+        }
+    }
+
     onMounted(() => {
       if (props.timeout) {
         timer = setTimeout(() => {
-            console.log('test')
             el.value?.parentNode?.remove();
         }, props.timeout);
       }

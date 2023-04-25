@@ -50,8 +50,8 @@ function showNotiError() {
         active: true,
         status: 'error',
         title: 'Minh error',
-        content: 'Notification error! Auto remove after 6s',
-        timeout: 6000,
+        content: 'Notification error! Auto remove after 6s! If hover, do not remove',
+        timeout: 5000,
     })
 }
 
