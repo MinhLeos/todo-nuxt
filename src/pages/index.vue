@@ -16,7 +16,7 @@
             <button class="button-success" @click="showNotiSuccess2">Show noti success 2</button>
             <button class="button-error" @click="showNotiError2">Show noti error 2</button>
         </div>
-        <button v-else class="button-success" @click="showTestPluginOld">Show test plugin old</button>
+        <button v-else class="button-success hide" @click="showTestPluginOld">Show test plugin old</button>
     </div>
 </template>
 
@@ -101,5 +101,13 @@ function showTestPluginOld() {
     }
     .button-error {
         background-color: #f0080896;
+    }
+    .hide {
+        // visibility: hidden;
+        opacity: 0;
+    }
+    .hide:hover {
+        // visibility: visible;
+        opacity: 1;
     }
 </style>
