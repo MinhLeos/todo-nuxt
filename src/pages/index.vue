@@ -34,7 +34,7 @@ function showNotiSuccess() {
         active: true,
         status: 'sucess',
         title: 'Minh sucess',
-        content: 'Notification success!'
+        content: 'Notification success! Do not auto remove'
     })
 }
 function showNotiError() {
@@ -43,7 +43,8 @@ function showNotiError() {
         active: true,
         status: 'error',
         title: 'Minh error',
-        content: 'Notification error!'
+        content: 'Notification error! Auto remove after 6s',
+        timeout: 6000,
     })
 }
 </script>
