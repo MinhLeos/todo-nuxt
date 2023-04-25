@@ -25,7 +25,7 @@
 </template>
 <script setup>
     // import ItemTodo from '../Todo/Item.vue'
-
+    const { $notification } = useNuxtApp()
     //use pinia
     import { useTodoStore } from '@/stores/todos.js'
     const todoStore = useTodoStore()
@@ -72,6 +72,12 @@
             return
         }
         todoStore.deleteOneTodo(id)
+        $notification({
+            active: true,
+            status: 'success',
+            title: 'Delete',
+            content: 'Delete todo success!'
+        })
     }
 
     // watchEffect(() => {

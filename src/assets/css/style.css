@@ -35,8 +35,9 @@
     z-index: 9999, */
     animation: animationCustom 0.7s ease-in;
 }
-.notification-item {
-
+.notification + .notification {
+    margin-top: 100px;
+    color: red;
 }
 @keyframes animationCustom {
     from {

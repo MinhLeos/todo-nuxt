@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-const { $noti } = useNuxtApp()
+const { $notification } = useNuxtApp()
 // const title = useState('title-client')
 // useHead({
 //     title: title
@@ -30,19 +30,19 @@ definePageMeta({
 
 function showNotiSuccess() {
     console.log('run')
-    $noti({
+    $notification({
         active: true,
         status: 'sucess',
-        title: 'Minh test',
+        title: 'Minh sucess',
         content: 'Notification success!'
     })
 }
 function showNotiError() {
     console.log('run')
-    $noti({
+    $notification({
         active: true,
         status: 'error',
-        title: 'Minh test',
+        title: 'Minh error',
         content: 'Notification error!'
     })
 }
