@@ -11,15 +11,22 @@
         <!-- <NewKeyBoard></NewKeyBoard> -->
         <button class="button-success" @click="showNotiSuccess">Show noti success</button>
         <button class="button-error" @click="showNotiError">Show noti error</button>
+        <div class="h-10"></div>
+        <div v-if="showTest2" class="mb-10">
+            <button class="button-success" @click="showNotiSuccess2">Show noti success 2</button>
+            <button class="button-error" @click="showNotiError2">Show noti error 2</button>
+        </div>
+        <button v-else class="button-success" @click="showTestPluginOld">Show test plugin old</button>
     </div>
 </template>
 
 <script setup>
-const { $notification } = useNuxtApp()
+const { $notification, $noti } = useNuxtApp()
 // const title = useState('title-client')
 // useHead({
 //     title: title
 // })
+const showTest2 = ref(false)
 const title = useState('title-server')
 useHead({
     title: title
@@ -29,7 +36,7 @@ definePageMeta({
 })
 
 function showNotiSuccess() {
-    console.log('run')
+    console.log('run sucess')
     $notification({
         active: true,
         status: 'sucess',
@@ -38,7 +45,7 @@ function showNotiSuccess() {
     })
 }
 function showNotiError() {
-    console.log('run')
+    console.log('run error')
     $notification({
         active: true,
         status: 'error',
@@ -47,7 +54,30 @@ function showNotiError() {
         timeout: 6000,
     })
 }
+
+function showNotiSuccess2() {
+    console.log('run sucess 2')
+    $noti({
+        active: true,
+        status: 'sucess',
+        title: 'Minh test',
+        content: 'Notification success!'
+    })
+}
+function showNotiError2() {
+    console.log('run error 2')
+    $noti({
+        active: true,
+        status: 'error',
+        title: 'Minh test',
+        content: 'Notification error!'
+    })
+}
+function showTestPluginOld() {
+    showTest2.value = true
+}
 </script>
+
 <style scoped lang="scss">
     button {
         margin-top: 20rem;

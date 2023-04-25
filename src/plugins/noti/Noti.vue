@@ -31,12 +31,19 @@
         }
         // document.querySelector(".notification")?.remove();
     }
+    let timer
     onMounted(() => {
       if (props.timeout) {
-        setTimeout(() => {
+        timer = setTimeout(() => {
             console.log('test')
             el.value?.parentNode?.remove();
         }, props.timeout);
       }
     });
+    onUnmounted(() => {
+        if(timer) {
+            console.log('clear timeout')
+            clearTimeout(timer)
+        }
+    })
 </script>

@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     plugins: [
         // { src: `~/plugins/tooltip`, mode: 'client'},
         { src: `~/plugins/noti/index.ts`, mode: 'client'},
+        { src: `~/plugins/old/notification.ts`, mode: 'client'},
     ],
     postcss: {
         plugins: {
