@@ -35,7 +35,7 @@
       if (props.timeout) {
         setTimeout(() => {
             console.log('test')
-            el.value?.remove();
+            el.value?.parentNode?.remove();
         }, props.timeout);
       }
     });
