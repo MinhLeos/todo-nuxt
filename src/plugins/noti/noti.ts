@@ -1,11 +1,21 @@
 import Noti  from './Noti.vue'
 import { createApp } from 'vue';
+import { useShowNotification } from '@/stores/noti'
+interface NotiOption {
+    title: String,
+    content: String,
+    status: String,
+    timeout: Number
+}
 
 export default {
     install: (app) => {
         const nuxtApp = useNuxtApp();
         let count = 1;
-        function createComponent(options) {
+        function createComponent(options: NotiOption) {
+            const notiPinia = useShowNotification()
+            console.log('notiPinia', notiPinia)
+            console.log('notiPinia.isShowNoti', notiPinia.isShowNoti)
             app.component('Noti', Noti);
             const MyComponent = createApp(app.component('Noti'), {
                 count: count,
@@ -46,7 +56,7 @@ export default {
             return MyComponent
         }
 
-        function init(options: object) {
+        function init(options: NotiOption) {
             // const body = document.querySelector('body');
             // const divRemove = document.querySelector('.notification')
             // if (divRemove && options?.remove) {
@@ -55,6 +65,6 @@ export default {
             createComponent(options)
         }
 
-        nuxtApp.provide('notification', (options: object) => init(options));
+        nuxtApp.provide('notification', (options: NotiOption) => init(options));
     }
 }
