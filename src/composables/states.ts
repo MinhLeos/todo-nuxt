@@ -1,0 +1,4 @@
+export const useNotifications = ()=>useState("notifications", ()=>{});
+export const useMyPlugin = ()=>useState("myPlugin", ()=>{});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFPLGFBQU0sbUJBQW1CLE1BQU0sU0FBYyxpQkFBaUIsTUFBTTtBQUFDLENBQUM7QUFDdEUsYUFBTSxjQUFjLE1BQU0sU0FBYyxZQUFZLE1BQU07QUFBQyxDQUFDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbInN0YXRlcy50cyJdLCJmaWxlIjoiRDovTGVhcm5pbmcvcGx1Z2luLW51eHQtMy9jb21wb3NhYmxlcy9zdGF0ZXMudHMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgdXNlTm90aWZpY2F0aW9ucyA9ICgpID0+IHVzZVN0YXRlPGFueT4oXCJub3RpZmljYXRpb25zXCIsICgpID0+IHt9KTtcclxuZXhwb3J0IGNvbnN0IHVzZU15UGx1Z2luID0gKCkgPT4gdXNlU3RhdGU8YW55PihcIm15UGx1Z2luXCIsICgpID0+IHt9KTtcclxuIl19
