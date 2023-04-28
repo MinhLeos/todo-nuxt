@@ -30,9 +30,11 @@ export default {
             } else {
                 const divCont = document.createElement('div');
                 divCont.classList.add('noti-container');
+                divCont.style.width = '400px';
                 const div = document.createElement('div');
                 div.classList.add('notification');
                 div.dataset.key = '' + count++;
+                
                 // div.style.position = 'fixed';
                 // div.style.top = '6rem';
                 // div.style.right = '1rem';

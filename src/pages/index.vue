@@ -32,7 +32,8 @@ useHead({
     title: title
 })
 definePageMeta({
-    ssr: false
+    ssr: false,
+    layout: false
 })
 
 function showNotiSuccess() {
@@ -51,7 +52,7 @@ function showNotiError() {
         status: 'error',
         title: 'Minh error',
         content: 'Notification error! Auto remove after 6s! If hover, do not remove',
-        timeout: 5000,
+        timeout: 6000,
     })
 }
 

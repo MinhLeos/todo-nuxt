@@ -1,5 +1,5 @@
 <template>
-    <div @mouseenter.stop="handleMouseEnter" @mouseleave.stop="handleMouseLeave" ref="el" class="flex justify-between text-[#fff] p-3 min-w-[300px] max-w-[700px] items-start" :class="customClass">
+    <div @mouseenter.stop="handleMouseEnter" @mouseleave.stop="handleMouseLeave" ref="el" class="flex justify-between text-[#fff] p-3 w-full items-start" :class="customClass">
         <div>
             <h4>{{props.title}}</h4>
             <p>{{props.content}} - {{props.count}}</p>
