@@ -1,34 +1,52 @@
 <template>
-    <div class="mt-24 flex">
-        <TodoSideBar :filter="filter"></TodoSideBar>
-        <div v-if="todoListCurrent.length > 0" class="list-todo-item">
-            <TodoItem 
-                v-for="(todo, index) in todoListCurrent" 
-                :index="index"
-                :key="todo.id" 
-                :todo="todo" 
-                :length="todosList.length"
-                @delete="deleteTodoItem"
-            >
-            </TodoItem>
-            
-            <!-- <TodoItem></TodoItem>
-            <TodoItem></TodoItem> -->
+    <div>
+        <div class="mt-24 flex">
+            <TodoSideBar :filter="filter"></TodoSideBar>
+            <div v-if="Array.isArray(todos) && todos.length > 0" class="list-todo-item">
+                <TodoItem 
+                    v-for="(todo, index) in todos" 
+                    :index="index"
+                    :key="todo.id" 
+                    :todo="todo" 
+                    :length="todosList.length"
+                    @delete="deleteTodoItem"
+                >
+                </TodoItem>
+                
+                <!-- <TodoItem></TodoItem>
+                <TodoItem></TodoItem> -->
 
-            <!-- <ItemTodo></ItemTodo>
-            <ItemTodo></ItemTodo> -->
+                <!-- <ItemTodo></ItemTodo>
+                <ItemTodo></ItemTodo> -->
+            </div>
+            <div v-else class="ml-56 text-[red] text-xl">
+                <p>Have no todo</p>
+            </div>
         </div>
-        <div v-else class="ml-56 text-[red] text-xl">
-            <p>Have no todo</p>
+        <div class="page">
+            <p v-if="Array.isArray(todos)">Page: {{ page }}</p>
+            <div>
+                <button v-ripple class="page-button" @click="previous" v-if="page > 1">Previous</button>
+                <button v-ripple class="page-button" @click="next" v-if="Array.isArray(todos) && todos.length == itemPerPage">Next</button>
+            </div>
         </div>
     </div>
 </template>
 <script setup>
     // import ItemTodo from '../Todo/Item.vue'
     const { $notification } = useNuxtApp()
+    const nuxtApp = useNuxtApp()
+    const pending = ref(false)
     //use pinia
     import { useTodoStore } from '@/stores/todos.js'
     const todoStore = useTodoStore()
+
+    // const localStorageTodos = useLocalStorage('todos', {})
+    // console.log('localStorage', localStorageTodos.value)
+
+    const sessionStorageTodos = useSessionStorage('todos', {})
+    console.log('sessionStorageTodos', sessionStorageTodos.value)
+    const sessionStoragePage = useSessionStorage('page', 1)
 
     const route = useRoute()
     // const filterValue = ref(route.query.filterValue || '')
@@ -43,6 +61,94 @@
     const filter = useState('filter')
     const isFilter = useState('is-filter')
 
+    const page = ref(sessionStoragePage.value);
+    const itemPerPage = ref(10)
+    const todos = ref()
+    
+    // ******useAsyncData*********
+    // const getTodos = async () => {
+    //         console.log('call API')
+    //         await clearNuxtData('todos')
+    //         const { data, error } = await useAsyncData(
+    //         'todos',
+    //         () => $fetch( `/api/todos`, {
+    //             method: 'GET',
+    //             //baseURL: 'http://localhost:3000',
+    //             params: {
+    //             page: page.value,
+    //             itemPerPage: itemPerPage.value,
+    //             }
+    //         } ), {initialCache: false}
+    //     );
+    //     todos.value = [...data.value]
+    // }
+
+    // ********* useFetch *************
+    const getTodos = async () => {
+            
+        await clearNuxtData()
+        if(sessionStorageTodos.value[page.value] && sessionStorageTodos.value[page.value].length > 0) {
+            todos.value = [...sessionStorageTodos.value[page.value]]
+            return
+        }
+        console.log('call API')
+        const { data, error } = await useFetch(
+            '/api/todos',
+            {
+                method: 'GET',
+                // baseURL: 'http://localhost:3000',
+                params: {
+                    page: page.value,
+                    itemPerPage: itemPerPage.value,
+                }
+            }
+        );
+        console.log('Error', error.value)
+        if (error.value) {
+            $notification({
+                active: true,
+                status: 'error',
+                title: 'Get List Todos Fail',
+                content: error.value || 'Get list todos fail!',
+                timeout: 6000,
+            })
+            return
+        }
+        sessionStorageTodos.value[page.value] = [...data.value]
+        todos.value = [...data.value]
+        $notification({
+            active: true,
+            status: 'sucess',
+            title: 'Get List Todos Success',
+            content: 'Get list todos success',
+            timeout: 6000,
+        })
+    }
+    onMounted(() => {
+        getTodos()
+    })
+    nuxtApp.hook("page:start", () => {
+        pending.value = true
+    })
+    nuxtApp.hook("page:finish", () => {
+        pending.value = false
+    })
+    const previous = () => {
+        if( page.value != 1 ){
+            page.value = page.value - 1 ;
+            sessionStoragePage.value = page.value
+        }
+    }
+
+    const next = () => {
+        if( todos.value.length == itemPerPage.value ){
+            page.value = page.value + 1;
+            sessionStoragePage.value = page.value
+        }
+    }
+    watch([page, itemPerPage], () => {
+        getTodos()
+    })
     //use pinia
     watchEffect(() => {
         if (!!search.value && isSearch.value) {
@@ -155,6 +261,27 @@
 
         &::-webkit-scrollbar {
             @apply hidden w-0;
+        }
+    }
+    .page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+
+        &-button {
+            width: 150px;
+            padding: 5px 10px;
+            margin-left: 1rem;
+            margin-top: 1rem;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background-color: rgba(0,145,168);
+            color: #ffffff;
+
+            &:hover {
+                opacity: 0.7;
+            }
         }
     }
 </style>

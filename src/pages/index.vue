@@ -33,7 +33,7 @@ useHead({
 })
 definePageMeta({
     ssr: false,
-    layout: false
+    // layout: false
 })
 
 function showNotiSuccess() {

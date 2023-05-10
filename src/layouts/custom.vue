@@ -4,6 +4,6 @@
         <div class="max-w-[1400px] mx-auto">
             <slot></slot>
         </div>
-        <Footer></Footer>
+        <!-- <Footer></Footer> -->
     </div>
 </template>

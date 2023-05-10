@@ -15,17 +15,17 @@
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('tooltip', {
     mounted(el, binding) {
-      console.log('el.offsetHeight', el.offsetHeight)
-      console.log('el.offsetWidth', el.offsetWidth)
-      console.log('binding', binding)
-      console.log('binding.value', binding.value)
+      // console.log('el.offsetHeight', el.offsetHeight)
+      // console.log('el.offsetWidth', el.offsetWidth)
+      // console.log('binding', binding)
+      // console.log('binding.value', binding.value)
       const div = document.createElement('div');
       const parent = el.parentElement
       div.innerText = binding.value.title + binding.value.title + binding.value.title;
       div.style.color = binding.value?.color ? binding.value.color : 'red'
       div.style.zIndex = '99999';
       div.style.width = '100%';
-      console.log('div.offsetHeight', div.offsetHeight)
+      // console.log('div.offsetHeight', div.offsetHeight)
       if (binding.value?.position) {
         switch (binding.value.position) {
           case 'top':

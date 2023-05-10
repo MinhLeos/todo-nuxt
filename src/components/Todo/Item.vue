@@ -39,13 +39,13 @@
         <!-- use Custom layout -->
         <NuxtLayout name="wrapper">
             <div class="todo-item-title">
-                <h3 v-tooltip="tooltip" @click="showDetails" class="text-[#50d71e] cursor-pointer truncate">{{ props.todo.name }}</h3>
+                <h3 v-tooltip="tooltip" @click="showDetails" class="text-[#50d71e] cursor-pointer truncate">{{ props.todo.name || props.todo.title }}</h3>
                 <p :class="status.class" @click="handleChangeStatus">{{ status.title }}</p>
             </div>
             <div @click="showDetails" class="todo-item-description cursor-pointer">
                 <p class="truncate" v-for="des in listDes" :key="des">{{ des }}</p>
             </div>
-            <p class="mt-4"><i>{{ new Date(props.todo.createdAt).toISOString() }}</i></p>
+            <p class="mt-4"><i>{{ props.todo?.createdAt ? new Date(props.todo.createdAt).toISOString() : new Date().toISOString()}}</i></p>
             <p><i>Id: {{ props.todo.id }}</i></p>
             <div class="mt-8">
                 <Button title="Edit" action="edit" @click="handleClickEdit"></Button>
@@ -76,7 +76,7 @@ const isShowDialog = reactive({
 
 const tooltip = computed(() => {
     return {
-        title: props.todo.name,
+        title: props.todo.name || props.todo.title,
         position: 'top',
         isFirst: props.index == 0,
         color: '#333'
@@ -96,7 +96,7 @@ const { todosList, changeStatus } = useTodos()
 // }
 
 const listDes = computed(() => {
-    const list = props.todo.description.split("\n");
+    const list = props.todo?.description ? props.todo.description.split("\n") : [];
     return list;
 });
 const status = computed(() => {
