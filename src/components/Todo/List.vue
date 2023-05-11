@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="page">
-            <p v-if="Array.isArray(todos)">Page: {{ page }}</p>
+            <!-- <p v-if="Array.isArray(todos)">Page: {{ page }}</p> -->
             <div>
                 <button v-ripple class="page-button" @click="previous" v-if="page > 1">Previous</button>
                 <button v-ripple class="page-button" @click="next" v-if="Array.isArray(todos) && todos.length == itemPerPage">Next</button>
@@ -33,6 +33,10 @@
     </div>
 </template>
 <script setup>
+
+    // Chú ý về perfomance >>> khi show list todos >>> popup show when click delete todo >>> có nhiều if >>> ảnh hương perfomance
+    // Khắc phục bằng cách chỉ dùng 1 popup  >>> chưa làm
+
     // import ItemTodo from '../Todo/Item.vue'
     const { $notification } = useNuxtApp()
     const nuxtApp = useNuxtApp()
