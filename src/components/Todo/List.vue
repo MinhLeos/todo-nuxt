@@ -66,6 +66,13 @@
     const todos = ref()
     
     // ******useAsyncData*********
+    // ********* Notes **************
+        // Chú ý khi dùng useAsyncData ( nếu chuyển page khi click) thì sẽ phải đợi useFetch chạy xong mới chuyển 
+        // còn nếu dùng useLazyAsyncData thì sẽ chuyển page ngay lập tức dù API chưa call xong
+        // Khi dùng useAsyncData với options có watch ( dùng với api thay đổi theo id ...) >>> API vẫn dc call đúng id mới
+        // và nếu API trước chưa chạy xong thì vẫn tiếp tục chạy 
+    // ********* Notes **************
+
     // const getTodos = async () => {
     //         console.log('call API')
     //         await clearNuxtData('todos') // nếu ko dùng thì khi F5 sẽ ko call lại API
@@ -84,9 +91,22 @@
     // }
 
     // ********* useFetch *************
+    // ********* Notes **************
+        // Chú ý khi dùng useFetch ( nếu chuyển page khi click) thì sẽ phải đợi useFetch chạy xong mới chuyển 
+        // còn nếu dùng useLazyFetch thì sẽ chuyển page ngay lập tức dù API chưa call xong
+        // khi dùng useFetch với options có watch ( dùng với api thay đổi theo id ...) >>> sẽ chỉ call đúng với id ban đầu
+        // và nếu API trước chưa chạy xong thì sẽ bị cancel
+    // ********* Notes **************
+
     const getTodos = async () => {
-            
-        await clearNuxtData()
+        //Nếu đưa call API ra bên ngoài chứ ko đặt trong hàm để call thì ko gặp trường hợp mô tả bên dưới
+        // Khi gọi hàm này ở onMouted thì phải có await clearNuxtData() hoặc await nextTick()
+        // Nếu ko có await clearNuxtData() hoặc await nextTick() thì thay vì gọi ở onMounted
+        // ta sẽ gọi ở nuxt Hook "page:finish"
+
+
+        // await clearNuxtData() // nếu ko dùng thì khi F5 lại sẽ ko call API
+        // await nextTick() //nếu ko dùng thì khi F5 lại sẽ ko call API
         if(sessionStorageTodos.value[page.value] && sessionStorageTodos.value[page.value].length > 0) {
             todos.value = [...sessionStorageTodos.value[page.value]]
             return
@@ -119,8 +139,8 @@
             return
         }
         console.log('12345', data)
-        sessionStorageTodos.value[page.value] = data ? [...data.value] : []
-        todos.value = data ? [...data.value] : []
+        sessionStorageTodos.value[page.value] = [...data.value]
+        todos.value = [...data.value]
         $notification({
             active: true,
             status: 'sucess',
@@ -129,14 +149,15 @@
             timeout: 6000,
         })
     }
-    onMounted(() => {
-        getTodos()
-    })
+    // onMounted(() => {
+    //     getTodos()
+    // })
     nuxtApp.hook("page:start", () => {
         pending.value = true
     })
     nuxtApp.hook("page:finish", () => {
         pending.value = false
+        getTodos()
     })
     const previous = () => {
         if( page.value != 1 ){
