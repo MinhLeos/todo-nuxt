@@ -68,7 +68,7 @@
     // ******useAsyncData*********
     // const getTodos = async () => {
     //         console.log('call API')
-    //         await clearNuxtData('todos')
+    //         await clearNuxtData('todos') // nếu ko dùng thì khi F5 sẽ ko call lại API
     //         const { data, error } = await useAsyncData(
     //         'todos',
     //         () => $fetch( `/api/todos`, {
@@ -78,7 +78,7 @@
     //             page: page.value,
     //             itemPerPage: itemPerPage.value,
     //             }
-    //         } ), {initialCache: false}
+    //         } )
     //     );
     //     todos.value = [...data.value]
     // }
@@ -102,7 +102,11 @@
                     itemPerPage: itemPerPage.value,
                 }
             }
+            // ,{initialCache: false}
+            //do API cache nên sẽ ko gửi request khác >>> dùng initialCache: false  để tránh điều này
+            // 1 số trang nói initialCache ko còn dc hỗ trợ cho useFetch nữa
         );
+
         console.log('Error', error.value)
         if (error.value) {
             $notification({
@@ -114,8 +118,9 @@
             })
             return
         }
-        sessionStorageTodos.value[page.value] = [...data.value]
-        todos.value = [...data.value]
+        console.log('12345', data)
+        sessionStorageTodos.value[page.value] = data ? [...data.value] : []
+        todos.value = data ? [...data.value] : []
         $notification({
             active: true,
             status: 'sucess',
