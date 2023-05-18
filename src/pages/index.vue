@@ -14,7 +14,11 @@
 </template>
 
 <script setup>
+
 const title = useState('title')
+const plugin = useState('plugin')
+plugin.value = 'Plugin V3'
+console.log('plugin', plugin)
 useHead({
     title: title
 })
